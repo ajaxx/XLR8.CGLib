@@ -2,11 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>XLR8.CGLib</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <authors>XLR8 Development Team</authors>
 		<language>en-us</language>
         <projectUrl>https://github.com/ajaxx/XLR8.CGLib</projectUrl>
-		<licenseUrl>https://github.com/ajaxx/XLR8.CGLib/LICENSE.txt</licenseUrl>
+		<licenseUrl>https://raw.githubusercontent.com/ajaxx/XLR8.CGLib/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A .NET library that generates IL based accessors, mutators and constructors.</description>
         <summary>A .NET library that generates IL based accessors, mutators and constructors.</summary>
