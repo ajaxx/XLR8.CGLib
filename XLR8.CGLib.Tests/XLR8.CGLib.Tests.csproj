@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard2.0;</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Language>en-US</Language>
+    <AssemblyName>XLR8.CGLib.Tests</AssemblyName>
+    <AssemblyTitle>XLR8.CGLib.Tests</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageId>XLR8.CGLib.Tests</PackageId>
+    <RootNamespace>XLR8.CGLib.Tests</RootNamespace>
+    <Description>Unit tests for XLR8.CGLib</Description>
+    <Summary>Unit tests for XLR8.CGLib.</Summary>
+    <Copyright>XLR8 Development Team, 2014-2017</Copyright>
+    <RepositoryType>Github</RepositoryType>
+    <Company>XLR8</Company>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <RepositoryUrl>https://github.com/ajaxx/XLR8.CGLib</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="NUnit" Version="3.8.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XLR8.CGLib\XLR8.CGLib.csproj" />
+  </ItemGroup>
+
+</Project>

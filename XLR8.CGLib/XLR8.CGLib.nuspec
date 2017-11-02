@@ -10,7 +10,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A .NET library that generates IL based accessors, mutators and constructors.</description>
         <summary>A .NET library that generates IL based accessors, mutators and constructors.</summary>
-        <copyright>Copyright (C) 2014 XLR8 Development Team</copyright>
+        <copyright>Copyright (C) 2014 - 2017 XLR8 Development Team</copyright>
 		<tags></tags>
 		<title>XLR8.CGLib</title>
         <dependencies></dependencies>

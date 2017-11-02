@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2014 XLR8 Development Team                                           /
+// Copyright (C) 2014 - 2017 XLR8 Development Team                                    /
 // ---------------------------------------------------------------------------------- /
 //   Licensed under the Apache License, Version 2.0 (the "License");                  /
 //   you may not use this file except in compliance with the License.                 /
@@ -17,7 +17,10 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
+
+#if NETFULL
 using System.Threading;
+#endif
 
 namespace XLR8.CGLib
 {
@@ -39,13 +42,20 @@ namespace XLR8.CGLib
                 AssemblyName assemblyName = new AssemblyName();
                 assemblyName.Name = "CGLibCapsule";
 
+#if NETFULL
                 AppDomain thisDomain = Thread.GetDomain();
 
                 sAssemblyBuilder = thisDomain.DefineDynamicAssembly(
                     assemblyName, 
                     AssemblyBuilderAccess.Run);
+#elif NETSTANDARD
+                sAssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    assemblyName, AssemblyBuilderAccess.Run);
+#else
+#error "building unknown version of codebase"
+#endif
             }
- 
+
             return sAssemblyBuilder;
         }
 
@@ -57,8 +67,7 @@ namespace XLR8.CGLib
         {
             if ( sModuleBuilder == null ) {
                 AssemblyBuilder assemblyBuilder = GetAssemblyBuilder();
-                sModuleBuilder = assemblyBuilder.DefineDynamicModule(
-                    "CGLibCapsule", false);
+                sModuleBuilder = assemblyBuilder.DefineDynamicModule("CGLibCapsule");
             }
 
             return sModuleBuilder;
@@ -90,7 +99,13 @@ namespace XLR8.CGLib
                     FieldAttributes.Public);
             }
 
+#if NETFULL
             return FastClass.Create(typeBuilder.CreateType());
+#elif NETSTANDARD
+            return FastClass.Create(typeBuilder.CreateTypeInfo().AsType());
+#else
+#error "building unknown version of codebase"
+#endif
         }
     }
 }

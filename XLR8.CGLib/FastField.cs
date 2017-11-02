@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2014 XLR8 Development Team                                           /
+// Copyright (C) 2014 - 2017 XLR8 Development Team                                    /
 // ---------------------------------------------------------------------------------- /
 //   Licensed under the Apache License, Version 2.0 (the "License");                  /
 //   you may not use this file except in compliance with the License.                 /
@@ -20,7 +20,7 @@ using System.Reflection.Emit;
 
 namespace XLR8.CGLib
 {
-    public class FastField
+    public class FastField : FastBase
     {
         /// <summary>
         /// Class object that this method belongs to.
@@ -164,25 +164,26 @@ namespace XLR8.CGLib
                 CallingConventions.Standard,
                 typeof(void),
                 new Type[]{ typeof(Object), typeof(Object) },
-                module,
+                field.DeclaringType,
+                //module,
                 true);
 
             // Create the IL generator
-            ILGenerator il = dynamicSetMethod.GetILGenerator();
+            ILGenerator il = dynamicSetMethod.GetILGenerator(256);
             // Is this calling an instance method; if so, load 'this'
             if (!field.IsStatic)
             {
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Castclass, field.DeclaringType);
                 il.Emit(OpCodes.Ldarg_1);
-                il.Emit(OpCodes.Castclass, field.FieldType);
+                EmitCastConversion(il, field.FieldType);
                 il.Emit(OpCodes.Stfld, targetField);
             }
             else
             {
                 il.Emit(OpCodes.Ldarg_1);
-                il.Emit(OpCodes.Castclass, field.FieldType);
-                il.Emit(OpCodes.Stsfld, targetField);
+                EmitCastConversion(il, field.FieldType);
+                il.Emit(OpCodes.Stsfld, field);
             }
 
             il.Emit(OpCodes.Ret);
